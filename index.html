@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEI™ Progress S-Curve Enterprise Engine (v6.7 Landscape Pro) | LAND GUARD GROUP</title>
+    <style>
+        :root { 
+            --primary: #0f172a; 
+            --accent: #2563eb; 
+            --gold: #d97706; 
+            --bg: #f8fafc; 
+            --success: #16a34a; 
+            --danger: #dc2626; 
+            --info: #0284c7;
+            --brand-navy: #090d16;
+            --brand-gold: #c5a059;
+            --card-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -4px rgba(0,0,0,0.05);
+        }
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg); 
+            color: #334155; 
+            margin: 0; 
+            padding: 20px; 
+            padding-bottom: 50px !important;
+            min-height: 100vh;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+        }
+        
+        /* Watermark Background */
+        .watermark-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 9000; display: flex; justify-content: center; align-items: center;
+            overflow: hidden; opacity: 0.025; user-select: none;
+        }
+        .watermark-text {
+            font-size: 2.5rem; font-weight: 900; color: #000; transform: rotate(-15deg);
+            white-space: nowrap; letter-spacing: 1.5px; text-transform: uppercase;
+        }
+
+        .container { max-width: 1750px; margin: 0 auto; transition: filter 0.3s; position: relative; z-index: 1; }
+        .container.locked { filter: blur(12px); pointer-events: none; }
+        
+        /* COMMERCIAL PAYWALL OVERLAY (559 THB) */
+        .paywall-overlay { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+            background: rgba(9, 13, 22, 0.97); 
+            display: flex; justify-content: center; align-items: center; 
+            z-index: 99999; backdrop-filter: blur(12px); 
+        }
+        .paywall-card { 
+            background: #0f172a; 
+            border: 2px solid var(--brand-gold);
+            padding: 28px 24px; border-radius: 18px; 
+            box-shadow: 0 25px 35px -5px rgba(0,0,0,0.6), 0 0 15px rgba(197, 160, 89, 0.2); 
+            text-align: center; max-width: 440px; width: 92%; color: #f8fafc; 
+        }
+        .paywall-card h2 { margin: 0 0 4px 0; color: var(--brand-gold); font-size: 1.35rem; font-weight: 800; letter-spacing: 0.5px; }
+        .price-badge {
+            background: rgba(197, 160, 89, 0.15); border: 1px dashed var(--brand-gold);
+            color: #fef08a; padding: 12px; border-radius: 10px; margin: 14px 0;
+        }
+        .price-badge .amount { font-size: 2.2rem; font-weight: 900; color: var(--brand-gold); }
+        
+        .qr-container {
+            background: #ffffff; padding: 10px; border-radius: 10px;
+            width: 170px; height: 170px; margin: 12px auto; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .qr-container img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+        .input-key-group { display: flex; gap: 8px; margin-top: 10px; }
+        .input-key-group input { 
+            flex: 1; padding: 10px; font-size: 0.95rem; text-align: center; 
+            letter-spacing: 1px; border: 1px solid #334155; background: #1e293b; color: #ffffff;
+            border-radius: 8px; outline: none; text-transform: uppercase;
+        }
+        .input-key-group input:focus { border-color: var(--brand-gold); }
+        .btn-activate { 
+            background: var(--brand-gold); color: #000; font-weight: 800; border: none; 
+            padding: 10px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; 
+        }
+        .btn-activate:hover { opacity: 0.9; transform: scale(1.02); }
+
+        .header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 16px 24px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--card-shadow); flex-wrap: wrap; gap: 12px; }
+        .badge { background: var(--gold); color: white; padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; display: inline-block; letter-spacing: 0.5px; }
+        .project-meta { background: #1e293b; color: #cbd5e1; padding: 12px 18px; border-radius: 10px; margin-top: 12px; font-size: 0.82rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; border-left: 5px solid var(--accent); }
+        
+        .nav-tabs { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+        .tab-btn { padding: 10px 18px; background: #e2e8f0; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; color: #475569; transition: all 0.2s; font-size: 0.85rem; }
+        .tab-btn:hover { background: #cbd5e1; }
+        .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        
+        .card { background: white; padding: 18px; border-radius: 14px; margin-top: 14px; box-shadow: var(--card-shadow); border: 1px solid #e2e8f0; page-break-inside: avoid; break-inside: avoid; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 10px; }
+        
+        /* OPTIMIZED COMPACT KPI CARDS */
+        .kpi { background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; border-left: 4px solid var(--accent); }
+        .kpi h4 { margin: 0; color: #64748b; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+        .kpi div { font-size: 1.15rem; font-weight: 800; color: var(--primary); margin-top: 4px; }
+
+        .contract-value-bar { background: linear-gradient(90deg, #0284c7 0%, #0369a1 100%); color: white; padding: 10px 18px; border-radius: 8px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 0.85rem; }
+        .contract-value-bar input { width: 170px; padding: 5px 10px; border-radius: 6px; border: none; font-weight: 800; font-size: 0.95rem; color: #0f172a; }
+
+        .summary-table-container { overflow-x: auto; margin-top: 10px; }
+        .summary-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: center; }
+        .summary-table th, .summary-table td { border: 1px solid #cbd5e1; padding: 6px 8px; }
+        .summary-table th { background: #0f172a; color: white; font-weight: 700; }
+        .summary-table .row-title { text-align: left; padding-left: 8px; font-weight: 700; }
+        .summary-table .bg-plan { background: #eff6ff; font-weight: 700; color: #1e40af; }
+        .summary-table .bg-actual { background: #fef3c7; font-weight: 700; color: #92400e; }
+
+        .alert-box { border: 2px solid #3b82f6; background: #eff6ff; color: #1e40af; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; }
+        th, td { border: 1px solid #e2e8f0; padding: 6px 8px; text-align: left; }
+        th { background: #f8fafc; color: #334155; font-weight: 700; }
+        
+        .wbs-table input[type="text"], .wbs-table input[type="number"], .wbs-table input[type="date"] { 
+            width: 100%; 
+            padding: 5px 6px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 6px; 
+            font-size: 0.82rem; 
+            box-sizing: border-box;
+        }
+
+        .wbs-code-input { min-width: 50px; font-weight: 700; text-align: center; }
+        .wbs-name-input { min-width: 220px; font-weight: 600; }
+        .wbs-date-input { min-width: 115px; cursor: pointer; font-size: 0.78rem !important; }
+        .wbs-num-input { min-width: 95px; font-weight: 700; text-align: right; }
+        .wbs-unit-input { min-width: 55px; text-align: center; }
+        
+        .gantt-bar { height: 12px; border-radius: 4px; background-color: #2563eb !important; opacity: 0.9; display: block; }
+        .gantt-bar-actual { height: 6px; border-radius: 4px; background-color: #d97706 !important; margin-top: 2px; display: block; }
+
+        .btn { background: var(--accent); color: white; border: none; padding: 7px 12px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.82rem; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+        .btn-success { background: var(--success); }
+        .btn-info { background: var(--info); }
+        .btn-danger { background: var(--danger); }
+        .btn-warning { background: var(--gold); }
+        .btn-lock { background: #475569; padding: 5px 10px; font-size: 0.78rem; border-radius: 6px; }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .status-tag { font-weight: 700; padding: 3px 8px; border-radius: 6px; font-size: 0.75rem; }
+        .status-ontrack { background: #dcfce7; color: #15803d; }
+        .status-lagging { background: #fee2e2; color: #b91c1c; }
+
+        .chart-container-box { 
+            position: relative; 
+            width: 100%; 
+            height: 320px; 
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); 
+            border: 1px solid #e2e8f0; 
+            border-radius: 10px; 
+            padding: 10px; 
+            box-sizing: border-box;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .app-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-top: 1px solid #1e293b;
+            z-index: 9990;
+        }
+        .app-footer b { color: #f8fafc; }
+
+        /* ADVANCED PRINT ENGINE v6.7 LANDSCAPE - STRICT A4 LANDSCAPE ENGINE */
+        @media print { 
+            @page {
+                size: A4 landscape;
+                margin: 6mm 8mm 6mm 8mm;
+            }
+
+            .no-print, .app-footer, .gantt-col { display: none !important; } 
+            body { padding: 0 !important; background: white; font-size: 8pt; } 
+            .paywall-overlay { display: none !important; } 
+            
+            .tab-content { display: block !important; opacity: 1 !important; visibility: visible !important; }
+            
+            #tab-summary { page-break-after: always !important; break-after: page !important; }
+            #tab-gantt { page-break-before: always !important; break-before: page !important; page-break-after: always !important; break-after: page !important; }
+            #tab-actionlist { page-break-before: always !important; break-before: page !important; page-break-after: always !important; break-after: page !important; }
+            #tab-obstacle { page-break-before: always !important; break-before: page !important; }
+            #tab-dailyreport, #tab-config { display: none !important; }
+
+            .header { padding: 8px 12px !important; margin-bottom: 4px !important; }
+            .header h1 { font-size: 1.15rem !important; }
+            .project-meta { padding: 8px 12px !important; margin-top: 4px !important; font-size: 0.72rem !important; gap: 6px !important; grid-template-columns: repeat(3, 1fr) !important; }
+            .contract-value-bar { padding: 6px 12px !important; margin-top: 4px !important; font-size: 0.75rem !important; }
+            .alert-box { padding: 6px 10px !important; margin-bottom: 4px !important; font-size: 0.72rem !important; }
+
+            .card { box-shadow: none !important; border: 1px solid #cbd5e1 !important; page-break-inside: avoid !important; break-inside: avoid !important; margin-top: 6px !important; padding: 8px !important; } 
+            
+            .grid { grid-template-columns: repeat(6, 1fr) !important; gap: 6px !important; margin-top: 4px !important; }
+            .kpi { padding: 6px 8px !important; }
+            .kpi h4 { font-size: 0.62rem !important; }
+            .kpi div { font-size: 0.88rem !important; margin-top: 2px !important; }
+
+            table { width: 100% !important; font-size: 0.72rem !important; table-layout: fixed !important; } 
+            tr { page-break-inside: avoid !important; break-inside: avoid !important; }
+            thead { display: table-header-group; }
+            th, td { padding: 4px 5px !important; word-break: break-word !important; } 
+            
+            .wbs-table input {
+                border: none !important;
+                background: transparent !important;
+                padding: 0 !important;
+                font-size: 0.72rem !important;
+                box-shadow: none !important;
+            }
+
+            .watermark-bg { opacity: 0.02 !important; display: flex !important; }
+            .chart-container-box { height: 220px !important; margin-top: 4px !important; margin-bottom: 4px !important; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
+
+    <div class="watermark-bg">
+        <div class="watermark-text" id="watermarkBrand">SEI™-PROGRESS - S-CURVE : LAND GUARD GROUP</div>
+    </div>
+
+    <!-- INTEGRATED COMMERCIAL PAYWALL OVERLAY (559 THB) -->
+    <div id="paywallOverlay" class="paywall-overlay">
+        <div class="paywall-card">
+            <h2>S-CURVE ENGINE - FULL ACCESS</h2>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 2px;">ปลดล็อกระบบคำนวณและติดตาม S-Curve รายโครงการถาวร</p>
+            
+            <div class="price-badge">
+                <div class="amount">฿559</div>
+                <div style="font-size: 0.75rem; opacity: 0.9;">ชำระครั้งเดียว ใช้งานได้ตลอดชีพ</div>
+            </div>
+
+            <div style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 6px;">1. สแกนชำระเงินผ่าน PromptPay</div>
+            
+            <div class="qr-container">
+                <img src="promptpay-qr.png" alt="PromptPay QR Code 559 THB" onerror="this.src='https://via.placeholder.com/160x160/ffffff/0f172a?text=PromptPay+559+THB'">
+            </div>
+            
+            <div style="font-size: 0.78rem; color: var(--brand-gold); font-weight: bold; margin-bottom: 12px;">
+                ชื่อบัญชี: ปุณยวีร์ ธนภู (Punyavee Tanaphu)
+            </div>
+
+            <div>
+                <div style="font-size: 0.8rem; color: #cbd5e1; text-align: left; margin-bottom: 4px;">2. กรอกรหัสเปิดใช้งาน (LICENSE KEY)</div>
+                <div class="input-key-group">
+                    <input type="text" id="license-input" placeholder="กรอกรหัสจาก LINE ที่นี่">
+                    <button class="btn-activate" onclick="activateLicense()">ACTIVATE</button>
+                </div>
+                <p id="license-msg" style="font-size: 0.72rem; margin-top: 6px; margin-bottom: 0; min-height: 16px;"></p>
+            </div>
+
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.72rem; color: #94a3b8;">
+                ส่งสลิปเพื่อรับรหัส ติดต่อ LINE: 
+                <a href="https://line.me/ti/p/~upskill456" target="_blank" style="color: var(--brand-gold); font-weight: bold; text-decoration: underline; margin-left: 4px;">
+                    upskill456
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="appContainer" class="container locked">
+        <div class="header">
+            <div>
+                <h1 style="margin:0; font-size: 1.35rem; font-weight: 800;">SEI™ Progress S-Curve Enterprise Engine (v6.7 Landscape Pro)</h1>
+                <p style="margin:3px 0 0 0; opacity: 0.88; font-size: 0.8rem;">Systemic Engineering Intelligence | Real-Time Dynamic S-Curve & EVM Engine</p>
+            </div>
+            <div style="text-align: right;">
+                <span class="badge" id="licBadge">SEI™Civil(Lic.94850)</span>
+                <div style="margin-top: 6px;">
+                    <button class="btn btn-lock no-print" onclick="relockPaywall()" style="background: var(--danger);">ล็อกระบบ</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-meta">
+            <div><b>ชื่อโครงการ:</b> <span id="meta-projName">โครงการปรับปรุงลานตู้คอนเทนเนอร์ NHP ลาดกระบัง</span></div>
+            <div><b>เจ้าของโครงการ (Owner):</b> <span id="meta-owner">บริษัท เอ็น เอช พรอสเพอริตี้ จำกัด</span></div>
+            <div><b>ที่ปรึกษา (Consultant):</b> <span id="meta-consultant">บริษัท เอ็น.เอส.พลัส เอ็นจิเนียริ่ง จำกัด</span></div>
+            <div><b>ผู้รับจ้าง (Contractor):</b> <span id="meta-contractor">บริษัท จุฬารุ่ง เซอร์เวย์ กรุ๊ป จำกัด</span></div>
+            <div><b>ระยะเวลาสัญญา:</b> <span id="meta-duration">120 วัน</span> (<span id="meta-dates">02/06/2026 - 29/09/2026</span>)</div>
+            <div><b>ผู้จัดการโครงการ / วิศวกร:</b> <span id="meta-pm">Punyavee Tanaphu (PM.)</span></div>
+        </div>
+
+        <div class="contract-value-bar">
+            <div>
+                <b>💰 มูลค่าโครงการตามสัญญารวม (Total Contract Amount):</b> 
+                <input type="number" id="contractValInput" value="50000000" onchange="updateContractValue(this.value)"> <b>บาท</b>
+            </div>
+            <div>
+                <b>ผลงานทำได้จริงสะสม (Earned Claim Value):</b> <span id="bar-earnedValue" style="font-weight:800; font-size:1.05rem; color:#fef08a;">0.00 บาท</span>
+                <button class="btn btn-danger no-print" style="margin-left:10px;" onclick="resetAllData()">🔄 ล้างข้อมูลเริ่มต้นใหม่</button>
+                <button class="btn btn-success no-print" style="margin-left:6px;" onclick="showClaimSummaryModal()">📋 คำนวณใบรวบรวมเบิกงวดงาน</button>
+            </div>
+        </div>
+
+        <div class="nav-tabs no-print">
+            <button class="tab-btn active" onclick="switchTab(event, 'summary')">Executive Dashboard & S-Curve</button>
+            <button class="tab-btn" onclick="switchTab(event, 'dailyreport')" style="background: #16a34a; color: white;">📝 รายงานประจำวัน (Daily Report)</button>
+            <button class="tab-btn" onclick="switchTab(event, 'gantt')">Master Gantt & WBS</button>
+            <button class="tab-btn" onclick="switchTab(event, 'actionlist')">Weekly Action List</button>
+            <button class="tab-btn" onclick="switchTab(event, 'obstacle')" style="background: #0284c7; color: white;">🔍 วิเคราะห์ปัญหา & อุปสรรค</button>
+            <button class="tab-btn" style="background: #cbd5e1; color: var(--primary);" onclick="switchTab(event, 'config')">⚙️ ตั้งค่า & Excel</button>
+        </div>
+
+        <!-- PAGE 1: EXECUTIVE DASHBOARD & REAL-TIME S-CURVE -->
+        <div id="tab-summary" class="tab-content active">
+            
+            <div class="alert-box">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <b style="font-size:0.88rem;">SEI™ Real-Time S-Curve Engine (v6.7 Landscape Pro)</b>
+                    <span style="background:#2563eb; color:white; padding:2px 8px; border-radius:12px; font-weight:bold; font-size:0.7rem;">REAL-TIME LIVE UPDATED</span>
+                </div>
+                <p style="margin:3px 0 0 0;" id="alertStatusText"><b>สถานะรายงาน Real-Time:</b> แสดงผลความก้าวหน้าสะสมจริง ณ เวลาปัจจุบัน คำนวณอัตโนมัติตามข้อมูล Daily Log และ WBS</p>
+            </div>
+
+            <div class="grid">
+                <div class="kpi"><h4>1. มูลค่าสัญญา</h4><div id="kpi-contractVal">50,000,000 บาท</div></div>
+                <div class="kpi" style="border-left-color: var(--success);"><h4>2. ผลงานจริง (EV)</h4><div id="kpi-earnedVal" style="color:var(--success);">0 บาท</div></div>
+                <div class="kpi"><h4>3. แผนสะสม (Plan %)</h4><div id="kpi-plan">0.00%</div></div>
+                <div class="kpi" style="border-left-color: var(--gold);"><h4>4. งานจริงสะสม (Actual %)</h4><div id="kpi-actual">0.00%</div></div>
+                <div class="kpi" style="border-left-color: var(--danger);"><h4>5. Variance (ช้า/เร็ว)</h4><div id="kpi-variance">0.00%</div></div>
+                <div class="kpi" style="border-left-color: var(--info);"><h4>6. SPI / แล้วเสร็จ</h4><div id="kpi-spi">1.00</div></div>
+            </div>
+
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                    <div>
+                        <h3 style="margin:0; font-size:1.05rem; font-weight:800; color:var(--primary);">1. แผนภูมิ Real-Time S-Curve ประเมินผลงานและความก้าวหน้า (A4 Landscape)</h3>
+                        <p style="margin:2px 0 0 0; font-size:0.75rem; color:#64748b;">เปรียบเทียบเส้น Planned S-Curve และ Actual Progress สะสมสดๆ ณ วันปัจจุบัน (Today Cut-Off Line)</p>
+                    </div>
+                    <button class="btn btn-info no-print" onclick="window.print()">Print Executive PDF Report (Landscape)</button>
+                </div>
+                <div class="chart-container-box" style="margin-top:8px;">
+                    <canvas id="offlineScurveCanvas"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-top:0; font-size:1.0rem; font-weight:800; color:var(--primary);">2. ตารางสรุปแผนดำเนินงานและความก้าวหน้ารายกิจกรรม (Master WBS Table)</h3>
+                <div class="summary-table-container">
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th style="width:5%;">WBS</th>
+                                <th style="width:22%;">หมวดงาน / รายการกิจกรรม</th>
+                                <th style="width:9%;">เริ่ม - สิ้นสุด</th>
+                                <th style="width:7%;">ปริมาณ</th>
+                                <th style="width:5%;">หน่วย</th>
+                                <th style="width:9%;">ราคา/หน่วย</th>
+                                <th style="width:7%;">Weight (%)</th>
+                                <th style="width:11%;">มูลค่าสัญญา (บาท)</th>
+                                <th style="width:11%;">ผลงานจริง (Earned)</th>
+                                <th style="width:7%;">Plan %</th>
+                                <th style="width:7%;">Actual %</th>
+                                <th style="width:7%;">สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dynamicMasterTableBody"></tbody>
+                        <tfoot>
+                            <tr class="bg-plan">
+                                <td colspan="6" style="text-align:right; padding-right:8px;">แผนงานความก้าวหน้าสะสมรวม (Overall Plan %)</td>
+                                <td id="sum-weight-total">100.00%</td>
+                                <td id="sum-contract-val-total">0 บาท</td>
+                                <td>-</td>
+                                <td id="sum-plan-pct" style="font-size:0.88rem; font-weight:800;">0.00%</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr class="bg-actual">
+                                <td colspan="6" style="text-align:right; padding-right:8px;">ผลงานทำจริงสะสมรวม (Overall Actual %)</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td id="foot-earnedTotal" style="font-size:0.88rem; color:#15803d; font-weight:800;">0 บาท</td>
+                                <td>-</td>
+                                <td id="sum-actual-pct" style="font-size:0.88rem; font-weight:800;">0.00%</td>
+                                <td id="foot-status-summary">On Track</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size:0.95rem; font-weight:800; color:var(--primary); margin:0 0 4px 0;">SEI™ Strategic AI Advisory Engine (บทวิเคราะห์และข้อแนะนำทางวิศวกรรม)</h3>
+                <div id="aiAdvisoryText" style="font-size:0.82rem; line-height: 1.4; color:#334155;"></div>
+            </div>
+        </div>
+
+        <div id="tab-dailyreport" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h3>📝 บันทึกรายงานประจำวันหน้างาน (Daily Field Execution Report)</h3>
+                    <button class="btn btn-info no-print" onclick="window.print()">Print Daily Report Sheet (A4)</button>
+                </div>
+                <form id="dailyReportForm" onsubmit="saveDailyReport(event)">
+                    <div class="grid">
+                        <div>
+                            <label><b>วันที่ปฏิบัติงาน:</b></label><br>
+                            <input type="date" id="repDate" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>หมวดงาน WBS ที่ดำเนินงาน:</b></label><br>
+                            <select id="repWbsSelect" required style="margin-top:5px; padding:6px;"></select>
+                        </div>
+                        <div>
+                            <label><b>ปริมาณงานที่ทำได้วันนี้:</b></label><br>
+                            <input type="number" id="repQtyAdd" step="0.01" min="0" placeholder="เช่น 150.00" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>กำลังพลรวม (Manpower):</b></label><br>
+                            <input type="number" id="repManpower" placeholder="จำนวนคน (เช่น 12)" required style="margin-top:5px;">
+                        </div>
+                    </div>
+
+                    <div class="grid" style="margin-top:10px;">
+                        <div>
+                            <label><b>เครื่องจักร & อุปกรณ์ที่ใช้:</b></label><br>
+                            <input type="text" id="repEquipment" placeholder="เช่น แบคโฮ PC200 2 คัน, รถบด 1 คัน" style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>สภาพอากาศหน้างาน:</b></label><br>
+                            <select id="repWeather" style="margin-top:5px; padding:6px;">
+                                <option value="☀️ แดดจัด / ปกติ">☀️ แดดจัด / ปกติ</option>
+                                <option value="☁️ ครึ้มฟ้าครึ้มฝน">☁️ ครึ้มฟ้าครึ้มฝน</option>
+                                <option value="🌧️ ฝนตกเล็กน้อย (ทำงานได้)">🌧️ ฝนตกเล็กน้อย (ทำงานได้)</option>
+                                <option value="⛈️ ฝนตกหนัก (หยุดงาน)">⛈️ ฝนตกหนัก (หยุดงาน)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:12px;">
+                        <label><b>รายละเอียดการปฏิบัติงาน / อุปสรรค / มาตรการความปลอดภัย (Safety):</b></label><br>
+                        <textarea id="repRemarks" rows="3" placeholder="ระบุรายละเอียดงานที่ทำได้และข้อสังเกต..." style="margin-top:5px; width:98%;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="margin-top:15px; padding:10px 24px; font-size:0.95rem;">บันทึก Daily Report & อัปเดต Real-Time S-Curve ทันที</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>ประวัติบันทึก Daily Reports ย้อนหลัง</h3>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>วันที่</th>
+                                <th>หมวดงาน WBS</th>
+                                <th>ปริมาณเพิ่ม</th>
+                                <th>กำลังพล</th>
+                                <th>เครื่องจักรที่ใช้</th>
+                                <th>สภาพอากาศ</th>
+                                <th>หมายเหตุ / อุปสรรค</th>
+                                <th class="no-print">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dailyReportHistoryBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 2: MASTER GANTT & WBS SCHEDULE -->
+        <div id="tab-gantt" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                    <h3 style="margin:0;">WBS & Gantt Schedule Management (Auto-Scheduled Plan)</h3>
+                    <div>
+                        <button class="btn btn-info no-print" onclick="autoCalculateWeights()" style="margin-right:6px;">⚖️ คำนวณ Weight % อัตโนมัติจากมูลค่า</button>
+                        <button class="btn btn-success no-print" onclick="addWbsRow()">+ เพิ่มหมวดงาน WBS</button>
+                        <button class="btn no-print" onclick="window.print()">Print Gantt PDF (Landscape)</button>
+                    </div>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table class="wbs-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;">WBS</th>
+                                <th style="width: 25%;">หมวดงาน / รายการปฏิบัติงาน</th>
+                                <th style="width: 11%;">📅 วันเริ่มต้น</th>
+                                <th style="width: 11%;">📅 วันสิ้นสุด</th>
+                                <th style="width: 9%;">ปริมาณงาน</th>
+                                <th style="width: 6%;">หน่วย</th>
+                                <th style="width: 12%;">ราคาต่อหน่วย (บาท)</th>
+                                <th style="width: 12%;">มูลค่างาน (บาท)</th>
+                                <th style="width: 6%;">Weight %</th>
+                                <th style="width: 6%;">Plan %</th>
+                                <th style="width: 6%;">Actual %</th>
+                                <th style="width: 8%;" class="gantt-col">Timeline Bar</th>
+                                <th style="width: 8%; text-align:center;" class="no-print">จัดการ (Actions)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="wbsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3: WEEKLY ACTION TASK LIST -->
+        <div id="tab-actionlist" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                    <h3 style="margin:0;">Weekly Action Task List (Checklist หน้างาน)</h3>
+                    <button class="btn btn-info no-print" onclick="window.print()">Print Action Checklist (Landscape)</button>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>รหัส WBS</th>
+                                <th>รายการงานหลักประจำสัปดาห์</th>
+                                <th>เป้าหมายประจำสัปดาห์</th>
+                                <th>สถานะปัจจุบัน</th>
+                                <th>การควบคุมความเสี่ยง/มาตรการหน้างาน</th>
+                            </tr>
+                        </thead>
+                        <tbody id="actionListTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 4: OBSTACLE & ROOT-CAUSE ANALYSIS -->
+        <div id="tab-obstacle" class="tab-content">
+            <div class="card">
+                <h3>🔍 SEI™ Advanced Field Obstacle & Root-Cause Analysis</h3>
+                <p style="font-size: 0.85rem; color: #64748b; margin-top:2px;">วิเคราะห์ปัญหา คอขวด และกำหนดมาตรการแก้ไขเชิงวิศวกรรม ครอบคลุมงานโยธา งานถนน และงานอาคาร</p>
+                
+                <form id="obstacleForm" onsubmit="saveObstacle(event)" class="no-print">
+                    <div class="grid">
+                        <div>
+                            <label><b>วันที่พบปัญหา:</b></label><br>
+                            <input type="date" id="obsDate" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>หมวดงานที่เกี่ยวข้อง (WBS):</b></label><br>
+                            <select id="obsWbsSelect" required style="margin-top:5px; padding:6px;"></select>
+                        </div>
+                        <div>
+                            <label><b>จำแนกหมวดหมู่ปัญหา (Engineering Category):</b></label><br>
+                            <select id="obsCategory" required style="margin-top:5px; padding:6px;">
+                                <optgroup label="🏗️ งานโยธา & โครงสร้างฐานราก (Civil & Sub-structure)">
+                                    <option value="งานดินตัด/ดินถม/ความชื้น/การบดอัด (Soil & Compaction)">งานดินตัด/ดินถม/ความชื้น/การบดอัด (Soil & Compaction)</option>
+                                    <option value="งานเสาเข็ม/ฐานราก/งานขุดดิน/เสถียรภาพชีทไพล์ (Piling & Excavation)">งานเสาเข็ม/ฐานราก/งานขุดดิน/เสถียรภาพชีทไพล์ (Piling & Excavation)</option>
+                                    <option value="งานคอนกรีตโครงสร้าง/กำลังอัด/งานแบบเหล็ก (Concrete & Formwork)">งานคอนกรีตโครงสร้าง/กำลังอัด/งานแบบเหล็ก (Concrete & Formwork)</option>
+                                </optgroup>
+                                <optgroup label="🛣️ งานถนน & ระบบระบายน้ำ (Road & Infrastructure)">
+                                    <option value="งานชั้นคันทาง/ชั้นรองพื้นทาง/ชั้นพื้นทาง (Subbase & Soil Aggregate)">งานชั้นคันทาง/ชั้นรองพื้นทาง/ชั้นพื้นทาง (Subbase & Soil Aggregate)</option>
+                                    <option value="งานผิวจราจร คสล./ยางแอสฟัลต์/Joint Sealer (Road Pavement & Joints)">งานผิวจราจร คสล./ยางแอสฟัลต์/Joint Sealer (Road Pavement & Joints)</option>
+                                    <option value="งานท่อระบายน้ำ/บ่อพัก คสล./ระดับน้ำท่วมขัง (Drainage & Flooding)">งานท่อระบายน้ำ/บ่อพัก คสล./ระดับน้ำท่วมขัง (Drainage & Flooding)</option>
+                                </optgroup>
+                                <optgroup label="🏢 งานสถาปัตยกรรม & อาคาร (Building & Architectural)">
+                                    <option value="งานโครงสร้างเหล็ก/งานเชื่อม/มุงหลังคา กันซึม (Roof & Structural Steel)">งานโครงสร้างเหล็ก/งานเชื่อม/มุงหลังคา กันซึม (Roof & Structural Steel)</option>
+                                    <option value="งานสถาปัตยกรรม/งานผนัง/งานตกแต่ง/Universal Design">งานสถาปัตยกรรม/งานผนัง/งานตกแต่ง/Universal Design</option>
+                                    <option value="งานระบบวิศวกรรมอาคาร M&E (ไฟฟ้า/สุขาภิบาล/ดับเพลิง/แอร์)">งานระบบวิศวกรรมอาคาร M&E (ไฟฟ้า/สุขาภิบาล/ดับเพลิง/แอร์)</option>
+                                </optgroup>
+                                <optgroup label="⚠️ บริหารจัดการ & ผลกระทบภายนอก (Management & External)">
+                                    <option value="ข้อกำหนด/การตรวจรับของที่ปรึกษา (Consultant Spec & Inspection)">ข้อกำหนด/การตรวจรับของที่ปรึกษา (Consultant Spec & Inspection)</option>
+                                    <option value="ความขัดแย้งลำดับพื้นที่ (Sequence-Lock & Area Handover)">ความขัดแย้งลำดับพื้นที่ (Sequence-Lock & Area Handover)</option>
+                                    <option value="กำลังพล/เครื่องจักร/ซัพพลายเออร์ (Resource & Supplier Bottleneck)">กำลังพล/เครื่องจักร/ซัพพลายเออร์ (Resource & Supplier Bottleneck)</option>
+                                    <option value="สภาพอากาศมรสุม/ภัยธรรมชาติ (Weather Impact)">สภาพอากาศมรสุม/ภัยธรรมชาติ (Weather Impact)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top:12px;">
+                        <label><b>วิเคราะห์แก่นของปัญหา (Root Cause Analysis):</b></label><br>
+                        <textarea id="obsRootCause" rows="2" placeholder="ระบุสาเหตุเชิงลึกทางวิศวกรรม..." style="margin-top:5px; width:98%;" required></textarea>
+                    </div>
+
+                    <div style="margin-top:12px;">
+                        <label><b>มาตรการแก้ไขเชิงวิศวกรรมและยุทธศาสตร์ (Engineering Countermeasures):</b></label><br>
+                        <textarea id="obsCountermeasure" rows="2" placeholder="ระบุมาตรการแก้ไข..." style="margin-top:5px; width:98%;" required></textarea>
+                    </div>
+
+                    <div class="grid" style="margin-top:12px;">
+                        <div>
+                            <label><b>ผู้รับผิดชอบ (Responsible):</b></label><br>
+                            <input type="text" id="obsOwner" value="Punyavee Tanaphu (PM.)" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>สถานะปัญหา (Status):</b></label><br>
+                            <select id="obsStatus" style="margin-top:5px; padding:6px;">
+                                <option value="🔴 วิกฤต/กำลังดำเนินการแก้ไข (Critical / In Progress)">🔴 วิกฤต/กำลังดำเนินการแก้ไข (Critical / In Progress)</option>
+                                <option value="🟡 เฝ้าระวัง/ติดตามผล (Monitoring)">🟡 เฝ้าระวัง/ติดตามผล (Monitoring)</option>
+                                <option value="🟢 แก้ไขลุล่วงแล้ว (Resolved)">🟢 แก้ไขลุล่วงแล้ว (Resolved)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="margin-top:12px;">บันทึกการวิเคราะห์ปัญหาหน้างาน</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                    <h3 style="margin:0;">ประวัติการวิเคราะห์ปัญหาและอุปสรรคหน้างาน (Obstacle Log)</h3>
+                    <button class="btn btn-info no-print" onclick="window.print()">Print Obstacle Report (Landscape)</button>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>วันที่</th>
+                                <th>WBS & หมวดงาน</th>
+                                <th>หมวดหมู่ปัญหา</th>
+                                <th>แก่นปัญหา (Root Cause)</th>
+                                <th>มาตรการแก้ไข (Countermeasure)</th>
+                                <th>สถานะ</th>
+                                <th class="no-print">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="obstacleTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-config" class="tab-content">
+            <div class="card">
+                <h3>⚙️ ตั้งค่าโครงการ & นำเข้า/ส่งออกข้อมูล (Excel / CSV)</h3>
+                <form onsubmit="saveProjectConfig(event)">
+                    <div class="grid">
+                        <div>
+                            <label><b>ชื่อโครงการ:</b></label><br>
+                            <input type="text" id="cfg-projName" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>เจ้าของโครงการ (Owner):</b></label><br>
+                            <input type="text" id="cfg-owner" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>ที่ปรึกษา (Consultant):</b></label><br>
+                            <input type="text" id="cfg-consultant" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>ผู้รับจ้าง (Contractor):</b></label><br>
+                            <input type="text" id="cfg-contractor" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>วันเริ่มต้นสัญญา:</b></label><br>
+                            <input type="date" id="cfg-startDate" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>วันสิ้นสุดสัญญา:</b></label><br>
+                            <input type="date" id="cfg-finishDate" required style="margin-top:5px;">
+                        </div>
+                        <div>
+                            <label><b>ผู้จัดการโครงการ / วิศวกรผู้ควบคุมงาน:</b></label><br>
+                            <input type="text" id="cfg-pm" value="Punyavee Tanaphu (PM.)" required style="margin-top:5px;">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="margin-top:15px;">บันทึกการตั้งค่าโครงการ</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>ศูนย์จัดการข้อมูล Excel / CSV Center</h3>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                    <button class="btn btn-info" onclick="exportWbsCsv()">📥 ส่งออก WBS เป็น CSV (Excel)</button>
+                    <label class="btn btn-success" style="cursor:pointer;">
+                        📤 นำเข้า WBS จาก CSV <input type="file" id="csvFileInput" onchange="importWbsCsv(event)" style="display:none;">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STICKY LEGAL FOOTER BAR -->
+    <div class="app-footer">
+        <b>SEI™ Grand Enterprise Suite v6.7 Landscape | Systemic Control Edition - LAND GUARD</b> 
+        <span style="margin: 0 8px; opacity: 0.5;">|</span> 
+        © 2026 Punyavee Tanaphu, Civil Engineer License CE.94850. All Rights Reserved.
+    </div>
+
+    <!-- CLAIM MODAL (DYNAMIC ENGINEER / PM NAME) -->
+    <div id="claimModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); z-index:99999; justify-content:center; align-items:center;">
+        <div style="background:white; padding:25px; border-radius:12px; max-width:850px; width:90%; max-height:85vh; overflow-y:auto;">
+            <h2 style="margin-top:0; color:var(--primary);">📋 สรุปใบรวบรวมผลงานเพื่อตั้งเบิกงวดงาน (Progress Payment Claim Sheet)</h2>
+            <p style="font-size:0.88rem; color:#64748b;">วิศวกรผู้ควบคุมงาน / ผู้จัดการโครงการ: <b id="claimEngineerName"></b></p>
+            <div id="claimModalContent" style="font-size:0.9rem; line-height:1.6; margin-top:15px;"></div>
+            <div style="text-align:right; margin-top:20px;">
+                <button class="btn btn-info" onclick="window.print()">พิมพ์ใบสรุปเบิกงวดงาน (A4/PDF)</button>
+                <button class="btn btn-danger" onclick="document.getElementById('claimModal').style.display='none'">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* COMMERCIAL PAYWALL ACTIVATION ENGINE */
+        const VALID_KEYS = ["SCURVE-559", "SCURVE-PRO-2026", "SEI-PUNYAVEE-2026"];
+
+        function checkActivation() {
+            const isActivated = localStorage.getItem('scurve_app_activated');
+            if (isActivated === 'true') {
+                document.getElementById('paywallOverlay').style.display = 'none';
+                document.getElementById('appContainer').classList.remove('locked');
+            } else {
+                document.getElementById('paywallOverlay').style.display = 'flex';
+                document.getElementById('appContainer').classList.add('locked');
+            }
+        }
+
+        function activateLicense() {
+            const inputKey = document.getElementById('license-input').value.trim().toUpperCase();
+            const msgEl = document.getElementById('license-msg');
+
+            if (VALID_KEYS.includes(inputKey) || /^SCURVE-\d{4}-CE$/.test(inputKey)) {
+                localStorage.setItem('scurve_app_activated', 'true');
+                msgEl.style.color = '#4ade80';
+                msgEl.textContent = '✅ ปลดล็อกสิทธิ์การใช้งานสำเร็จ!';
+                setTimeout(() => {
+                    checkActivation();
+                    renderAllData();
+                }, 800);
+            } else {
+                msgEl.style.color = '#f87171';
+                msgEl.textContent = '❌ รหัสเปิดใช้งานไม่ถูกต้อง';
+            }
+        }
+
+        function relockPaywall() {
+            if (confirm('คุณต้องการล็อกหน้าจอและออกจากระบบใช่หรือไม่?')) {
+                localStorage.removeItem('scurve_app_activated');
+                checkActivation();
+            }
+        }
+
+        /* SECURITY INTEGRITY ENGINE */
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || 
+                (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80))) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        function verifyIntegrity() {
+            const el = document.getElementById('licBadge');
+            const mark = document.getElementById('watermarkBrand');
+            const footer = document.querySelector('.app-footer');
+            if (!el || !mark || !footer || 
+                !el.textContent.includes('SEI™Civil') || 
+                !mark.textContent.includes('LAND GUARD GROUP') ||
+                !footer.textContent.includes('CE.94850')) {
+                document.body.innerHTML = '<h1 style="color:red; text-align:center; margin-top:20%;">⚠️ CORRUPTED LICENSE DETECTED</h1>';
+            }
+        }
+        setInterval(verifyIntegrity, 2000);
+
+        /* HIGH-PRECISION S-CURVE CANVAS ENGINE */
+        function drawUltraScurve(canvasId, planPoints, actualPoints, labels, currentWeekIdx) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.parentNode.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = (rect.height || 320) * dpr;
+            canvas.style.width = `${rect.width}px`;
+            canvas.style.height = `${rect.height || 320}px`;
+
+            ctx.scale(dpr, dpr);
+            
+            const width = rect.width;
+            const height = rect.height || 320;
+            
+            ctx.clearRect(0, 0, width, height);
+
+            const padding = { top: 35, right: 30, bottom: 35, left: 50 };
+            const graphWidth = width - padding.left - padding.right;
+            const graphHeight = height - padding.top - padding.bottom;
+
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            ctx.font = '10px Inter, "Segoe UI", sans-serif';
+            ctx.fillStyle = '#64748b';
+
+            for (let i = 0; i <= 10; i++) {
+                let yVal = i * 10;
+                let yPos = padding.top + graphHeight - (i / 10) * graphHeight;
+                
+                ctx.beginPath();
+                ctx.strokeStyle = (i === 0 || i === 10) ? '#cbd5e1' : '#f1f5f9';
+                ctx.lineWidth = (i === 0 || i === 10) ? 1.5 : 1;
+                ctx.moveTo(padding.left, yPos);
+                ctx.lineTo(padding.left + graphWidth, yPos);
+                ctx.stroke();
+
+                ctx.textAlign = 'right';
+                ctx.font = 'bold 9px Inter, sans-serif';
+                ctx.fillStyle = '#64748b';
+                ctx.fillText(yVal + '%', padding.left - 6, yPos + 3);
+            }
+
+            const stepX = graphWidth / Math.max(1, (labels.length - 1));
+            labels.forEach((label, i) => {
+                let xPos = padding.left + i * stepX;
+                ctx.beginPath();
+                ctx.strokeStyle = (i === currentWeekIdx) ? '#2563eb' : '#f1f5f9';
+                ctx.lineWidth = (i === currentWeekIdx) ? 1.5 : 1;
+                ctx.moveTo(xPos, padding.top);
+                ctx.lineTo(xPos, padding.top + graphHeight);
+                ctx.stroke();
+
+                ctx.textAlign = 'center';
+                ctx.font = (i === currentWeekIdx) ? 'bold 10px Inter, sans-serif' : '9px Inter, sans-serif';
+                ctx.fillStyle = (i === currentWeekIdx) ? '#2563eb' : '#475569';
+                ctx.fillText(label, xPos, padding.top + graphHeight + 15);
+            });
+
+            if (currentWeekIdx >= 0 && currentWeekIdx < labels.length) {
+                let todayX = padding.left + currentWeekIdx * stepX;
+                ctx.beginPath();
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = '#dc2626';
+                ctx.lineWidth = 2;
+                ctx.moveTo(todayX, padding.top);
+                ctx.lineTo(todayX, padding.top + graphHeight);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.fillStyle = '#dc2626';
+                ctx.beginPath();
+                ctx.roundRect(todayX - 20, padding.top - 20, 40, 14, 4);
+                ctx.fill();
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 8px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('TODAY', todayX, padding.top - 10);
+            }
+
+            function getCoords(val, index) {
+                return {
+                    x: padding.left + index * stepX,
+                    y: padding.top + graphHeight - (val / 100) * graphHeight
+                };
+            }
+
+            function drawSmoothLine(points, color, lineWidth) {
+                if (points.length < 2) return;
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = lineWidth;
+
+                let pts = points.map((p) => getCoords(p.val, p.idx));
+                ctx.moveTo(pts[0].x, pts[0].y);
+
+                for (let i = 0; i < pts.length - 1; i++) {
+                    let p0 = pts[i == 0 ? i : i - 1];
+                    let p1 = pts[i];
+                    let p2 = pts[i + 1];
+                    let p3 = pts[i + 2 < pts.length ? i + 2 : i + 1];
+
+                    let cp1x = p1.x + (p2.x - p0.x) / 6;
+                    let cp1y = p1.y + (p2.y - p0.y) / 6;
+                    let cp2x = p2.x - (p3.x - p1.x) / 6;
+                    let cp2y = p2.y - (p3.y - p1.y) / 6;
+
+                    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+                }
+                ctx.stroke();
+                return pts;
+            }
+
+            let validPlan = planPoints.map((val, idx) => ({ val, idx }));
+            if (validPlan.length > 0) {
+                let grad = ctx.createLinearGradient(0, padding.top, 0, padding.top + graphHeight);
+                grad.addColorStop(0, 'rgba(37, 99, 235, 0.12)');
+                grad.addColorStop(1, 'rgba(37, 99, 235, 0.00)');
+
+                let ptsPlan = drawSmoothLine(validPlan, '#2563eb', 2.5);
+
+                if (ptsPlan && ptsPlan.length > 0) {
+                    ctx.lineTo(ptsPlan[ptsPlan.length - 1].x, padding.top + graphHeight);
+                    ctx.lineTo(ptsPlan[0].x, padding.top + graphHeight);
+                    ctx.closePath();
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                }
+
+                ptsPlan.forEach((pt) => {
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fill();
+                    ctx.strokeStyle = '#2563eb';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                });
+            }
+
+            let validActuals = [];
+            actualPoints.forEach((val, i) => {
+                if (val !== null && val !== undefined) validActuals.push({ val: val, idx: i });
+            });
+
+            if (validActuals.length > 0) {
+                let ptsAct = drawSmoothLine(validActuals, '#d97706', 3);
+
+                ptsAct.forEach((pt, i) => {
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
+                    ctx.fillStyle = '#d97706';
+                    ctx.fill();
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+
+                    if (i === ptsAct.length - 1) {
+                        ctx.save();
+                        ctx.shadowColor = 'rgba(217, 119, 6, 0.3)';
+                        ctx.shadowBlur = 4;
+                        ctx.fillStyle = '#d97706';
+                        ctx.beginPath();
+                        ctx.roundRect(pt.x - 22, pt.y - 24, 44, 18, 4);
+                        ctx.fill();
+                        ctx.restore();
+
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = 'bold 9px Inter, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(validActuals[i].val.toFixed(1) + '%', pt.x, pt.y - 12);
+                    }
+                });
+            }
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+            ctx.beginPath();
+            ctx.roundRect(padding.left + 10, 5, 360, 22, 5);
+            ctx.fill();
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.font = 'bold 10px Inter, "Segoe UI", sans-serif';
+            ctx.textBaseline = 'middle';
+            
+            ctx.fillStyle = '#2563eb';
+            ctx.beginPath();
+            ctx.roundRect(padding.left + 15, 12, 12, 7, 2);
+            ctx.fill();
+            ctx.fillStyle = '#1e293b';
+            ctx.textAlign = 'left';
+            ctx.fillText('Planned S-Curve (แผนงาน)', padding.left + 32, 16);
+
+            ctx.fillStyle = '#d97706';
+            ctx.beginPath();
+            ctx.roundRect(padding.left + 180, 12, 12, 7, 2);
+            ctx.fill();
+            ctx.fillStyle = '#1e293b';
+            ctx.textAlign = 'left';
+            ctx.fillText('Real-Time Actual (งานจริง)', padding.left + 198, 16);
+        }
+
+        /* STATE MANAGEMENT */
+        let contractTotalValue = parseFloat(localStorage.getItem('sei_contract_val')) || 6212000;
+
+        function updateContractValue(val) {
+            contractTotalValue = parseFloat(val) || 0;
+            localStorage.setItem('sei_contract_val', contractTotalValue);
+            autoCalculateWeights();
+        }
+
+        function resetAllData() {
+            if(confirm('⚠️ คุณต้องการล้างข้อมูลทั้งหมด และเริ่มต้นป้อนข้อมูลโครงการใหม่ใช่หรือไม่?')) {
+                localStorage.removeItem('sei_ent_wbs_v6');
+                localStorage.removeItem('sei_ent_reports_v6');
+                localStorage.removeItem('sei_ent_obstacles_v6');
+                wbsData = [
+                    { code: "1.0", name: "งานเตรียมพื้นที่และโครงสร้างฐานราก", startDate: "2026-06-02", finishDate: "2026-09-01", qty: 1000, unitPrice: 1500, actualQty: 120, unit: "ตร.ม.", amount: 1500000, weight: 24.15, plan: 100.0, actual: 12.0 },
+                    { code: "2.0", name: "งานโครงสร้างหลักและผิวจราจร/อาคาร", startDate: "2026-07-01", finishDate: "2026-09-01", qty: 1000, unitPrice: 2000, actualQty: 0, unit: "ตร.ม.", amount: 2000000, weight: 32.20, plan: 100.0, actual: 0.0 },
+                    { code: "3.0", name: "หมวดงานใหม่", startDate: "2026-06-02", finishDate: "2026-09-29", qty: 1356, unitPrice: 2000, actualQty: 0, unit: "หน่วย", amount: 2712000, weight: 43.66, plan: 76.47, actual: 0.0 }
+                ];
+                dailyReportsData = [];
+                obstaclesData = [];
+                renderAllData();
+                alert('✅ ล้างข้อมูลเรียบร้อยแล้ว!');
+            }
+        }
+
+        let defaultConfig = {
+            projName: "โครงการปรับปรุงลานตู้คอนเทนเนอร์ NHP ลาดกระบัง",
+            owner: "บริษัท เอ็น เอช พรอสเพอริตี้ จำกัด",
+            consultant: "บริษัท เอ็น.เอส.พลัส เอ็นจิเนียริ่ง จำกัด",
+            contractor: "บริษัท จุฬารุ่ง เซอร์เวย์ กรุ๊ป จำกัด",
+            startDate: "2026-06-02",
+            finishDate: "2026-09-29",
+            pm: "Punyavee Tanaphu (PM.)"
+        };
+
+        let projConfig = JSON.parse(localStorage.getItem('sei_ent_config_v6')) || defaultConfig;
+
+        let defaultWbsData = [
+            { code: "1.0", name: "งานเตรียมพื้นที่และโครงสร้างฐานราก", startDate: "2026-06-02", finishDate: "2026-09-01", qty: 1000, unitPrice: 1500, actualQty: 120, unit: "ตร.ม.", amount: 1500000, weight: 24.15, plan: 100.0, actual: 12.0 },
+            { code: "2.0", name: "งานโครงสร้างหลักและผิวจราจร/อาคาร", startDate: "2026-07-01", finishDate: "2026-09-01", qty: 1000, unitPrice: 2000, actualQty: 0, unit: "ตร.ม.", amount: 2000000, weight: 32.20, plan: 100.0, actual: 0.0 },
+            { code: "3.0", name: "หมวดงานใหม่", startDate: "2026-06-02", finishDate: "2026-09-29", qty: 1356, unitPrice: 2000, actualQty: 0, unit: "หน่วย", amount: 2712000, weight: 43.66, plan: 76.47, actual: 0.0 }
+        ];
+
+        let wbsData = JSON.parse(localStorage.getItem('sei_ent_wbs_v6')) || defaultWbsData;
+        let dailyReportsData = JSON.parse(localStorage.getItem('sei_ent_reports_v6')) || [];
+        let obstaclesData = JSON.parse(localStorage.getItem('sei_ent_obstacles_v6')) || [];
+
+        window.onload = function() {
+            checkActivation();
+            document.getElementById('repDate').valueAsDate = new Date();
+            document.getElementById('obsDate').valueAsDate = new Date();
+            loadConfigToForm();
+            window.addEventListener('resize', calculateKPIsAndRenderChart);
+        };
+
+        function loadConfigToForm() {
+            document.getElementById('cfg-projName').value = projConfig.projName;
+            document.getElementById('cfg-owner').value = projConfig.owner;
+            document.getElementById('cfg-consultant').value = projConfig.consultant;
+            document.getElementById('cfg-contractor').value = projConfig.contractor;
+            document.getElementById('cfg-startDate').value = projConfig.startDate;
+            document.getElementById('cfg-finishDate').value = projConfig.finishDate;
+            document.getElementById('cfg-pm').value = projConfig.pm;
+            updateMetaDisplay();
+        }
+
+        function saveProjectConfig(e) {
+            e.preventDefault();
+            projConfig.projName = document.getElementById('cfg-projName').value;
+            projConfig.owner = document.getElementById('cfg-owner').value;
+            projConfig.consultant = document.getElementById('cfg-consultant').value;
+            projConfig.contractor = document.getElementById('cfg-contractor').value;
+            projConfig.startDate = document.getElementById('cfg-startDate').value;
+            projConfig.finishDate = document.getElementById('cfg-finishDate').value;
+            projConfig.pm = document.getElementById('cfg-pm').value;
+
+            localStorage.setItem('sei_ent_config_v6', JSON.stringify(projConfig));
+            updateMetaDisplay();
+            calculateKPIsAndRenderChart();
+            alert('บันทึกการตั้งค่าโครงการเรียบร้อยแล้ว!');
+        }
+
+        function updateMetaDisplay() {
+            document.getElementById('meta-projName').textContent = projConfig.projName;
+            document.getElementById('meta-owner').textContent = projConfig.owner;
+            document.getElementById('meta-consultant').textContent = projConfig.consultant;
+            document.getElementById('meta-contractor').textContent = projConfig.contractor;
+            document.getElementById('meta-pm').textContent = projConfig.pm;
+            document.getElementById('meta-dates').textContent = `${projConfig.startDate} ถึง ${projConfig.finishDate}`;
+            
+            let start = new Date(projConfig.startDate);
+            let finish = new Date(projConfig.finishDate);
+            let totalDays = Math.max(1, Math.round((finish - start) / (1000 * 60 * 60 * 24)));
+            document.getElementById('meta-duration').textContent = `${totalDays} วัน`;
+        }
+
+        function switchTab(evt, tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+            if(tabId === 'summary') {
+                setTimeout(calculateKPIsAndRenderChart, 50);
+            }
+        }
+
+        function renderAllData() {
+            calculateAutoTimePhasedPlans();
+            renderWbsTable();
+            renderDynamicMasterTable();
+            renderActionListTable();
+            renderDailyReportsTable();
+            renderObstaclesTable();
+            calculateKPIsAndRenderChart();
+            saveData();
+        }
+
+        function calculateAutoTimePhasedPlans() {
+            let today = new Date();
+            wbsData.forEach((item) => {
+                let pStart = item.startDate ? new Date(item.startDate) : new Date(projConfig.startDate);
+                let pFinish = item.finishDate ? new Date(item.finishDate) : new Date(projConfig.finishDate);
+                let duration = Math.max(1, Math.round((pFinish - pStart) / (1000 * 60 * 60 * 24)));
+                
+                if (today < pStart) {
+                    item.plan = 0.0;
+                } else if (today >= pFinish) {
+                    item.plan = 100.0;
+                } else {
+                    let elapsed = Math.max(0, Math.round((today - pStart) / (1000 * 60 * 60 * 24)));
+                    item.plan = Math.min(100, Math.max(0, (elapsed / duration) * 100));
+                }
+            });
+        }
+
+        function autoCalculateWeights() {
+            let totalVal = wbsData.reduce((sum, item) => sum + (parseFloat(item.amount) || 0), 0);
+            if (totalVal > 0) {
+                wbsData.forEach(item => {
+                    item.weight = parseFloat((( (item.amount || 0) / totalVal) * 100).toFixed(2));
+                });
+                contractTotalValue = totalVal;
+                document.getElementById('contractValInput').value = contractTotalValue;
+                localStorage.setItem('sei_contract_val', contractTotalValue);
+            }
+        }
+
+        function renderDynamicMasterTable() {
+            const tbody = document.getElementById('dynamicMasterTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            let sumWeight = 0;
+            let sumVal = 0;
+
+            wbsData.forEach((item) => {
+                let itemVal = item.amount || ((item.weight / 100) * contractTotalValue);
+                let itemEarned = (item.actual / 100) * itemVal;
+                let uPrice = item.unitPrice || (item.qty > 0 ? itemVal / item.qty : 0);
+                sumWeight += item.weight;
+                sumVal += itemVal;
+
+                let statusBadge = item.actual >= item.plan ? 
+                    '<span class="status-tag status-ontrack">On Track</span>' : 
+                    '<span class="status-tag status-lagging">Lagging</span>';
+
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>${item.code}</b></td>
+                    <td class="row-title">${item.name}</td>
+                    <td><small style="color:#64748b;">${item.startDate || projConfig.startDate}<br>${item.finishDate || projConfig.finishDate}</small></td>
+                    <td>${item.qty.toLocaleString('th-TH')}</td>
+                    <td>${item.unit}</td>
+                    <td>${uPrice.toLocaleString('th-TH', {minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+                    <td><b>${item.weight.toFixed(2)}%</b></td>
+                    <td>${itemVal.toLocaleString('th-TH')}</td>
+                    <td style="color:#15803d; font-weight:bold;">${itemEarned.toLocaleString('th-TH')}</td>
+                    <td><b>${item.plan.toFixed(2)}%</b></td>
+                    <td style="color:#b45309; font-weight:bold;">${item.actual.toFixed(2)}%</td>
+                    <td>${statusBadge}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('sum-weight-total').textContent = sumWeight.toFixed(2) + '%';
+            document.getElementById('sum-contract-val-total').textContent = sumVal.toLocaleString('th-TH') + ' บาท';
+        }
+
+        function renderWbsTable() {
+            const tbody = document.getElementById('wbsTableBody');
+            const selectRep = document.getElementById('repWbsSelect');
+            const selectObs = document.getElementById('obsWbsSelect');
+            tbody.innerHTML = ''; selectRep.innerHTML = ''; selectObs.innerHTML = '';
+
+            wbsData.forEach((item, index) => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><input type="text" class="wbs-code-input" value="${item.code}" onchange="updateWbs(${index}, 'code', this.value)"></td>
+                    <td><input type="text" class="wbs-name-input" value="${item.name}" onchange="updateWbs(${index}, 'name', this.value)"></td>
+                    <td><input type="date" class="wbs-date-input" value="${item.startDate || projConfig.startDate}" onchange="updateWbs(${index}, 'startDate', this.value)"></td>
+                    <td><input type="date" class="wbs-date-input" value="${item.finishDate || projConfig.finishDate}" onchange="updateWbs(${index}, 'finishDate', this.value)"></td>
+                    <td><input type="number" class="wbs-num-input" value="${item.qty}" onchange="updateWbs(${index}, 'qty', this.value)"></td>
+                    <td><input type="text" class="wbs-unit-input" value="${item.unit}" onchange="updateWbs(${index}, 'unit', this.value)"></td>
+                    <td><input type="number" step="0.01" class="wbs-num-input" value="${item.unitPrice || 0}" onchange="updateWbs(${index}, 'unitPrice', this.value)"></td>
+                    <td><b style="color:#0f172a; font-size:0.88rem;">${(item.amount || 0).toLocaleString('th-TH')}</b></td>
+                    <td><b style="color:#2563eb;">${item.weight.toFixed(2)}%</b></td>
+                    <td><b style="color:#1e40af;">${item.plan.toFixed(2)}%</b></td>
+                    <td><input type="number" step="0.1" style="width: 55px; text-align:center;" value="${item.actual}" onchange="updateWbs(${index}, 'actual', this.value)"></td>
+                    <td class="gantt-col">
+                        <div class="gantt-bar" style="width: ${Math.min(100, item.plan)}%;"></div>
+                        <div class="gantt-bar-actual" style="width: ${Math.min(100, item.actual)}%;"></div>
+                    </td>
+                    <td class="no-print" style="text-align:center; white-space:nowrap;">
+                        <button class="btn btn-warning" style="padding: 3px 6px; font-size:0.72rem; margin-right:2px;" onclick="editWbsRowModal(${index})" title="แก้ไขหมวดงานนี้">✏️ แก้ไข</button>
+                        <button class="btn btn-danger" style="padding: 3px 6px; font-size:0.72rem;" onclick="deleteWbsRow(${index})" title="ลบหมวดงานนี้">🗑️ ลบ</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                let opt1 = document.createElement('option');
+                opt1.value = index;
+                opt1.textContent = `${item.code} ${item.name}`;
+                selectRep.appendChild(opt1);
+
+                let opt2 = document.createElement('option');
+                opt2.value = index;
+                opt2.textContent = `${item.code} ${item.name}`;
+                selectObs.appendChild(opt2);
+            });
+        }
+
+        function editWbsRowModal(index) {
+            let item = wbsData[index];
+            let newName = prompt('แก้ไขชื่อหมวดงาน / รายการกิจกรรม:', item.name);
+            if (newName !== null && newName.trim() !== '') {
+                wbsData[index].name = newName.trim();
+                renderAllData();
+            }
+        }
+
+        function renderActionListTable() {
+            const tbody = document.getElementById('actionListTableBody');
+            tbody.innerHTML = '';
+            wbsData.forEach(item => {
+                let statusTag = item.actual >= item.plan ? 
+                    '<span class="status-tag status-ontrack">On Track</span>' : 
+                    '<span class="status-tag status-lagging">Accelerate Target</span>';
+                
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>${item.code}</b></td>
+                    <td>${item.name}</td>
+                    <td>${item.plan.toFixed(1)}% (${item.qty} ${item.unit})</td>
+                    <td>${statusTag} (ทำได้ ${item.actual}%)</td>
+                    <td>${item.actual >= item.plan ? 'รักษากำลังพลและมาตรฐานงาน' : 'เพิ่มชั่วโมงทำงาน (OT) และบดอัดไล่ความชื้นเร่งด่วน'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateWbs(index, field, value) {
+            if (field === 'code' || field === 'name' || field === 'unit' || field === 'startDate' || field === 'finishDate') {
+                wbsData[index][field] = value;
+            } else {
+                wbsData[index][field] = parseFloat(value) || 0;
+            }
+
+            if (field === 'qty' || field === 'unitPrice') {
+                let q = wbsData[index].qty || 0;
+                let p = wbsData[index].unitPrice || 0;
+                if (q > 0 && p > 0) {
+                    wbsData[index].amount = q * p;
+                }
+                autoCalculateWeights();
+            }
+
+            if(field === 'qty' || field === 'actualQty') {
+                if(wbsData[index].qty > 0) {
+                    wbsData[index].actual = Math.min(100, (wbsData[index].actualQty / wbsData[index].qty) * 100);
+                }
+            }
+            renderAllData();
+        }
+
+        function addWbsRow() {
+            wbsData.push({ 
+                code: `${wbsData.length + 1}.0`, 
+                name: "หมวดงานใหม่", 
+                startDate: projConfig.startDate,
+                finishDate: projConfig.finishDate,
+                qty: 100, 
+                unitPrice: 1000,
+                actualQty: 0, 
+                unit: "หน่วย", 
+                amount: 100000,
+                weight: 10.0, 
+                plan: 0, 
+                actual: 0 
+            });
+            autoCalculateWeights();
+            renderAllData();
+        }
+
+        function deleteWbsRow(index) {
+            if(confirm('ต้องการลบบันทึกหมวดงานนี้ใช่หรือไม่?')) {
+                wbsData.splice(index, 1);
+                autoCalculateWeights();
+                renderAllData();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('sei_ent_wbs_v6', JSON.stringify(wbsData));
+            localStorage.setItem('sei_ent_reports_v6', JSON.stringify(dailyReportsData));
+            localStorage.setItem('sei_ent_obstacles_v6', JSON.stringify(obstaclesData));
+        }
+
+        function calculateKPIsAndRenderChart() {
+            let start = new Date(projConfig.startDate);
+            let finish = new Date(projConfig.finishDate);
+            let today = new Date();
+            
+            let totalDays = Math.max(1, Math.round((finish - start) / (1000 * 60 * 60 * 24)));
+            let elapsedDays = Math.max(0, Math.min(totalDays, Math.round((today - start) / (1000 * 60 * 60 * 24))));
+
+            let totalWeight = 0, totalPlannedWeighted = 0, totalActualWeighted = 0;
+            wbsData.forEach(item => {
+                totalWeight += item.weight;
+                totalPlannedWeighted += (item.plan * item.weight) / 100;
+                totalActualWeighted += (item.actual * item.weight) / 100;
+            });
+
+            let plannedOverall = totalWeight > 0 ? (totalPlannedWeighted / totalWeight) * 100 : 0;
+            let actualOverall = totalWeight > 0 ? (totalActualWeighted / totalWeight) * 100 : 0;
+            let variance = actualOverall - plannedOverall;
+            let spi = plannedOverall > 0 ? (actualOverall / plannedOverall) : 1.0;
+
+            let totalEarnedValue = (actualOverall / 100) * contractTotalValue;
+
+            document.getElementById('kpi-contractVal').textContent = contractTotalValue.toLocaleString('th-TH') + ' บาท';
+            document.getElementById('kpi-earnedVal').textContent = totalEarnedValue.toLocaleString('th-TH') + ' บาท';
+            document.getElementById('bar-earnedValue').textContent = totalEarnedValue.toLocaleString('th-TH') + ' บาท';
+            document.getElementById('foot-earnedTotal').textContent = totalEarnedValue.toLocaleString('th-TH') + ' บาท';
+
+            let daysDelayed = (variance / 100) * totalDays;
+            let forecastFinishDays = spi > 0 ? Math.round(totalDays / spi) : totalDays;
+            let forecastDate = new Date(start);
+            forecastDate.setDate(forecastDate.getDate() + forecastFinishDays);
+
+            document.getElementById('kpi-plan').textContent = plannedOverall.toFixed(2) + '%';
+            document.getElementById('kpi-actual').textContent = actualOverall.toFixed(2) + '%';
+            document.getElementById('sum-plan-pct').textContent = plannedOverall.toFixed(2) + '%';
+            document.getElementById('sum-actual-pct').textContent = actualOverall.toFixed(2) + '%';
+            document.getElementById('foot-status-summary').textContent = variance >= 0 ? 'On Track (ตามแผน)' : 'Lagging (ช้ากว่าแผน)';
+            document.getElementById('foot-status-summary').style.color = variance >= 0 ? 'var(--success)' : 'var(--danger)';
+            
+            let varEl = document.getElementById('kpi-variance');
+            varEl.textContent = (variance >= 0 ? '+' : '') + variance.toFixed(2) + '% (' + daysDelayed.toFixed(1) + ' วัน)';
+            varEl.style.color = variance >= 0 ? 'var(--success)' : 'var(--danger)';
+
+            let spiEl = document.getElementById('kpi-spi');
+            spiEl.textContent = `${spi.toFixed(2)} | คาดว่าแล้วเสร็จ: ${forecastDate.toISOString().split('T')[0]}`;
+            spiEl.style.color = spi >= 1 ? 'var(--success)' : 'var(--danger)';
+
+            generateAiAdvisory(spi, variance, daysDelayed, forecastDate);
+            
+            let totalContractWeeks = Math.max(1, Math.ceil(totalDays / 7));
+            let labels = [];
+            for (let i = 1; i <= totalContractWeeks; i++) {
+                labels.push('W' + i);
+            }
+            
+            let planPoints = labels.map((_, idx) => {
+                let targetDate = new Date(start);
+                targetDate.setDate(targetDate.getDate() + (idx * 7));
+                
+                let weekPlanWeightedSum = 0;
+                wbsData.forEach(item => {
+                    let itemStart = item.startDate ? new Date(item.startDate) : start;
+                    let itemFinish = item.finishDate ? new Date(item.finishDate) : finish;
+                    let itemDur = Math.max(1, Math.round((itemFinish - itemStart) / (1000 * 60 * 60 * 24)));
+                    
+                    let itemPctAtWeek = 0;
+                    if (targetDate >= itemFinish) {
+                        itemPctAtWeek = 100;
+                    } else if (targetDate > itemStart) {
+                        let elapsedDays = Math.round((targetDate - itemStart) / (1000 * 60 * 60 * 24));
+                        itemPctAtWeek = Math.min(100, Math.max(0, (elapsedDays / itemDur) * 100));
+                    }
+                    weekPlanWeightedSum += (itemPctAtWeek * item.weight) / 100;
+                });
+                return totalWeight > 0 ? Math.min(100, (weekPlanWeightedSum / totalWeight) * 100) : 0;
+            });
+
+            let totalWeeks = labels.length;
+            let currentWeekIndex = Math.min(totalWeeks - 1, Math.max(0, Math.floor((elapsedDays / totalDays) * totalWeeks)));
+
+            let actualPoints = labels.map((_, idx) => {
+                if (actualOverall === 0) return null;
+                if (idx > currentWeekIndex) return null;
+                if (idx === currentWeekIndex) return actualOverall;
+                let x = (idx + 1) / (currentWeekIndex + 1);
+                return actualOverall * Math.pow(x, 1.1);
+            });
+            
+            drawUltraScurve('offlineScurveCanvas', planPoints, actualPoints, labels, currentWeekIndex);
+        }
+
+        function generateAiAdvisory(spi, variance, daysDelayed, forecastDate) {
+            const el = document.getElementById('aiAdvisoryText');
+            if (spi >= 1.0) {
+                el.innerHTML = `<p style="color:var(--success); margin:0;"><b>[สถานะปกติ - Normal Status]</b> ดัชนีประสิทธิภาพ SPI = ${spi.toFixed(2)} โครงการดำเนินงานได้ดีตามแผนงาน คาดว่าจะแล้วเสร็จทันกำหนดสัญญา (${projConfig.finishDate})</p>`;
+            } else if (spi >= 0.85) {
+                el.innerHTML = `<p style="color:var(--gold); margin:0;"><b>[เตือนภัย - Warning Lag]</b> ดัชนีประสิทธิภาพ SPI = ${spi.toFixed(2)} โครงการเริ่มมีความล่าช้าสะสม ${Math.abs(daysDelayed).toFixed(1)} วัน แนะนำให้ปรับสัดส่วนเครื่องจักรและเพิ่มชั่วโมงทำงาน (OT)</p>`;
+            } else {
+                el.innerHTML = `<p style="color:var(--danger); margin:0;"><b>[วิกฤต - Critical Lagging]</b> ดัชนีประสิทธิภาพ SPI = ${spi.toFixed(2)} โครงการมีความล่าช้าสะสม ${Math.abs(daysDelayed).toFixed(1)} วัน คาดการณ์วันแล้วเสร็จใหม่คือ <b>${forecastDate.toISOString().split('T')[0]}</b> แนะนำเปิดใช้ยุทธศาสตร์เร่งรัดงานหน้างานทันที</p>`;
+            }
+        }
+
+        /* DYNAMIC CLAIM SUMMARY MODAL ENGINE */
+        function showClaimSummaryModal() {
+            let modal = document.getElementById('claimModal');
+            let content = document.getElementById('claimModalContent');
+            let engNameEl = document.getElementById('claimEngineerName');
+            
+            engNameEl.textContent = projConfig.pm || 'Punyavee Tanaphu (PM.)';
+            
+            let totalEarnedValue = (parseFloat(document.getElementById('kpi-actual').textContent) / 100) * contractTotalValue;
+            
+            let html = `
+                <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                    <tr style="background:#f1f5f9;"><td><b>ชื่อโครงการ:</b></td><td>${projConfig.projName}</td></tr>
+                    <tr><td><b>เจ้าของโครงการ (Owner):</b></td><td>${projConfig.owner}</td></tr>
+                    <tr style="background:#f1f5f9;"><td><b>ผู้รับจ้าง (Contractor):</b></td><td>${projConfig.contractor}</td></tr>
+                    <tr><td><b>มูลค่าสัญญารวม:</b></td><td><b>${contractTotalValue.toLocaleString('th-TH')} บาท</b></td></tr>
+                    <tr style="background:#dcfce7;"><td><b>มูลค่าผลงานเสนอเบิกงวดนี้ (Earned Value Claim):</b></td><td><b style="color:#15803d; font-size:1.1rem;">${totalEarnedValue.toLocaleString('th-TH')} บาท</b></td></tr>
+                </table>
+                <h4 style="margin-top:15px; margin-bottom:5px;">รายละเอียดยอดเงินจำแนกตามหมวดงาน:</h4>
+                <table style="width:100%; border-collapse:collapse; font-size:0.8rem;">
+                    <thead><tr style="background:#1e293b; color:white;"><th>WBS</th><th>หมวดงาน</th><th>มูลค่าตามสัญญา (บาท)</th><th>% งานจริง</th><th>ยอดเงินตั้งเบิก (บาท)</th></tr></thead>
+                    <tbody>
+            `;
+
+            wbsData.forEach(item => {
+                let itemVal = item.amount || ((item.weight/100)*contractTotalValue);
+                let itemClaim = (item.actual/100)*itemVal;
+                html += `<tr><td>${item.code}</td><td>${item.name}</td><td>${itemVal.toLocaleString('th-TH')}</td><td>${item.actual}%</td><td><b>${itemClaim.toLocaleString('th-TH')}</b></td></tr>`;
+            });
+
+            html += `</tbody></table>`;
+            content.innerHTML = html;
+            modal.style.display = 'flex';
+        }
+
+        function saveDailyReport(e) {
+            e.preventDefault();
+            const wbsIndex = document.getElementById('repWbsSelect').value;
+            const qtyAdd = parseFloat(document.getElementById('repQtyAdd').value) || 0;
+            const manpower = document.getElementById('repManpower').value;
+            const equipment = document.getElementById('repEquipment').value;
+            const weather = document.getElementById('repWeather').value;
+            const remarks = document.getElementById('repRemarks').value;
+            const date = document.getElementById('repDate').value;
+
+            wbsData[wbsIndex].actualQty = (wbsData[wbsIndex].actualQty || 0) + qtyAdd;
+            if(wbsData[wbsIndex].qty > 0) {
+                wbsData[wbsIndex].actual = Math.min(100, (wbsData[wbsIndex].actualQty / wbsData[wbsIndex].qty) * 100);
+            }
+
+            dailyReportsData.unshift({
+                date: date,
+                task: `${wbsData[wbsIndex].code} ${wbsData[wbsIndex].name}`,
+                qtyAdd: qtyAdd,
+                unit: wbsData[wbsIndex].unit,
+                manpower: manpower,
+                equipment: equipment,
+                weather: weather,
+                remarks: remarks
+            });
+
+            renderAllData();
+            alert('✅ บันทึก Daily Report เรียบร้อยแล้ว! อัปเดตกราฟ Real-Time S-Curve แล้ว');
+            document.getElementById('dailyReportForm').reset();
+            document.getElementById('repDate').valueAsDate = new Date();
+        }
+
+        function renderDailyReportsTable() {
+            const tbody = document.getElementById('dailyReportHistoryBody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            dailyReportsData.forEach((rep, index) => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${rep.date}</td>
+                    <td><b>${rep.task}</b></td>
+                    <td><b style="color:#15803d;">+${rep.qtyAdd} ${rep.unit || ''}</b></td>
+                    <td>${rep.manpower} คน</td>
+                    <td>${rep.equipment || '-'}</td>
+                    <td><small>${rep.weather}</small></td>
+                    <td>${rep.remarks || '-'}</td>
+                    <td class="no-print"><button class="btn btn-danger" onclick="deleteDailyReport(${index})">ลบ</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function deleteDailyReport(index) {
+            if(confirm('ต้องการลบบันทึก Daily Report นี้ใช่หรือไม่?')) {
+                dailyReportsData.splice(index, 1);
+                renderAllData();
+            }
+        }
+
+        function saveObstacle(e) {
+            e.preventDefault();
+            const wbsIndex = document.getElementById('obsWbsSelect').value;
+            const date = document.getElementById('obsDate').value;
+            const category = document.getElementById('obsCategory').value;
+            const rootCause = document.getElementById('obsRootCause').value;
+            const countermeasure = document.getElementById('obsCountermeasure').value;
+            const owner = document.getElementById('obsOwner').value;
+            const status = document.getElementById('obsStatus').value;
+
+            obstaclesData.unshift({
+                date: date,
+                task: `${wbsData[wbsIndex].code} ${wbsData[wbsIndex].name}`,
+                category: category,
+                rootCause: rootCause,
+                countermeasure: countermeasure,
+                owner: owner,
+                status: status
+            });
+
+            renderAllData();
+            alert('✅ บันทึกวิเคราะห์ปัญหาเรียบร้อยแล้ว!');
+            document.getElementById('obstacleForm').reset();
+            document.getElementById('obsDate').valueAsDate = new Date();
+        }
+
+        function renderObstaclesTable() {
+            const tbody = document.getElementById('obstacleTableBody');
+            tbody.innerHTML = '';
+            obstaclesData.forEach((obs, index) => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${obs.date}</td>
+                    <td><b>${obs.task}</b></td>
+                    <td><span style="background:#e0f2fe; color:#0369a1; padding:2px 6px; border-radius:4px; font-size:0.72rem;">${obs.category}</span></td>
+                    <td>${obs.rootCause}</td>
+                    <td><b>${obs.countermeasure}</b><br><small style="color:#64748b;">(ผู้รับผิดชอบ: ${obs.owner})</small></td>
+                    <td>${obs.status}</td>
+                    <td class="no-print"><button class="btn btn-danger" onclick="deleteObstacle(${index})">ลบ</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function deleteObstacle(index) {
+            if(confirm('ต้องการลบบันทึกปัญหานี้ใช่หรือไม่?')) {
+                obstaclesData.splice(index, 1);
+                renderAllData();
+            }
+        }
+
+        function exportWbsCsv() {
+            let csvContent = "\uFEFFWBS,TaskName,StartDate,FinishDate,Qty,Unit,UnitPrice,Amount,Weight,PlanPct,ActualPct\n";
+            wbsData.forEach(row => {
+                csvContent += `"${row.code}","${row.name}","${row.startDate}","${row.finishDate}",${row.qty},"${row.unit}",${row.unitPrice || 0},${row.amount || 0},${row.weight},${row.plan},${row.actual}\n`;
+            });
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", `SEI_WBS_Export_v6.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function importWbsCsv(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    const text = evt.target.result;
+                    const lines = text.split(/\r\n|\n/);
+                    let newWbs = [];
+
+                    for (let i = 0; i < lines.length; i++) {
+                        let line = lines[i].trim();
+                        if (!line) continue;
+
+                        let cols = line.includes(';') ? line.split(';') : line.split(',');
+
+                        if (i === 0 && (cols[0].toLowerCase().includes('wbs') || cols[1].toLowerCase().includes('task'))) {
+                            continue;
+                        }
+
+                        if (cols.length >= 5) {
+                            let clean = (val) => val ? val.replace(/"/g, '').trim() : '';
+                            let code = clean(cols[0]);
+                            let name = clean(cols[1]);
+                            let startDate = clean(cols[2]) || projConfig.startDate;
+                            let finishDate = clean(cols[3]) || projConfig.finishDate;
+                            let qty = parseFloat(clean(cols[4])) || 0;
+                            let unit = clean(cols[5]) || 'หน่วย';
+                            let unitPrice = parseFloat(clean(cols[6])) || 0;
+                            let amount = parseFloat(clean(cols[7])) || (qty * unitPrice);
+                            let weight = parseFloat(clean(cols[8])) || 0;
+                            let actual = cols[10] ? (parseFloat(clean(cols[10])) || 0) : 0;
+
+                            if (code && name) {
+                                newWbs.push({
+                                    code: code,
+                                    name: name,
+                                    startDate: startDate,
+                                    finishDate: finishDate,
+                                    qty: qty,
+                                    unitPrice: unitPrice,
+                                    actualQty: (actual / 100) * qty,
+                                    unit: unit,
+                                    amount: amount,
+                                    weight: weight,
+                                    plan: 0,
+                                    actual: actual
+                                });
+                            }
+                        }
+                    }
+
+                    if (newWbs.length > 0) {
+                        wbsData = newWbs;
+                        autoCalculateWeights();
+                        renderAllData();
+                        alert('✅ นำเข้าข้อมูล WBS สำเร็จจำนวน ' + newWbs.length + ' รายการ!');
+                    } else {
+                        alert('⚠️ ไม่พบข้อมูลที่ถูกต้องในไฟล์ กรุณาตรวจสอบโครงสร้าง CSV');
+                    }
+                } catch (err) {
+                    alert('❌ เกิดข้อผิดพลาดในการอ่านไฟล์: ' + err.message);
+                }
+                e.target.value = '';
+            };
+
+            reader.readAsText(file, 'TIS-620');
+        }
+    </script>
+</body>
+</html>
